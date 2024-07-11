@@ -26,6 +26,7 @@ class AAJTAKNewsSpider(CrawlSpider):
 
     def parse(self, response):
         """
+            examples valid for aajtak.in:
             "title" : response.xpath("//meta[@property='og:title']/@content").extract(),
             "tags" : response.xpath("//meta[@name='keywords']/@content").extract(),
             "locationtags" : response.css("div.tranding-topics-main a::text").getall(),
@@ -39,14 +40,11 @@ class AAJTAKNewsSpider(CrawlSpider):
         l = ItemLoader(item=AajtakItem(), response=response)
         
         l.add_xpath("title", '//meta[@property="og:title"]/@content')
-        l.add_xpath("tags", '//meta[@name="keywords"]/@content')
-        l.add_css("locationtags", "div.tranding-topics-main a")
         l.add_xpath("description", '//meta[@property="og:description"]/@content')
         l.add_css("details", "p.text-align-justify")
         l.add_xpath("time", '/html/body/div[7]/div/div[2]/div[8]/div[1]/div[1]/div[2]/ul/li[3]')
         l.add_xpath("date", 'html/body/div[7]/div/div[2]/div[8]/div[1]/div[1]/div[2]/ul/li[2]')
         l.add_xpath("location", '/html/body/div[7]/div/div[2]/div[8]/div[1]/div[1]/div[2]/ul/li[1]')
-        l.add_xpath("link", '//meta[@property="og:url"]/@content')
         
         # l.add_value("last_updated", "today")  # you can also use literal values
         
