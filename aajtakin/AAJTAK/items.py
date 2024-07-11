@@ -17,10 +17,10 @@ def clean_data(value):
 
 class AajtakItem(scrapy.Item):
     # define the fields for your item here like:
-       title = scrapy.Field(
+    title = scrapy.Field(
         input_processor=MapCompose(remove_tags, clean_data),
         output_processor=TakeFirst()
-    
+    )
     description = scrapy.Field(
         input_processor=MapCompose(remove_tags, clean_data),
         output_processor=TakeFirst()
